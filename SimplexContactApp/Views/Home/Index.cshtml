@@ -1,0 +1,73 @@
+﻿@model SimplexContactApp.Models.ContactModel
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1 class="text-center text-primary">Contact Person</h1>
+
+<div class="row">
+   
+	<div class="col-md-4">
+		<h2 class="text-black-50 bg-success text-center"> @ViewData["Message"]</h2>
+		<form asp-action="Index">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+				<label asp-for="FirstName" class="control-label"></label>
+				<input asp-for="FirstName" class="form-control" />
+				<span asp-validation-for="FirstName" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="LastName" class="control-label"></label>
+				<input asp-for="LastName" class="form-control" />
+				<span asp-validation-for="LastName" class="text-danger "></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Gender" class="control-label"></label><br>
+				Male:  @Html.RadioButtonFor(s => s.Gender, "Male", new { @class = "custom-radio" })
+				Female: @Html.RadioButtonFor(s => s.Gender, "Female", new { @class = "custom-radio" })
+				Prefer not to say: @Html.RadioButtonFor(s => s.Gender, "Prefer not to say", new { @class = "custom-radio" })
+				<span asp-validation-for="Gender" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="PhoneNumber" class="control-label"></label>
+				<input asp-for="PhoneNumber" class="form-control" />
+				<span asp-validation-for="PhoneNumber" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				@for(Int32 i = 0; i <= Model.skill; i++) { 
+			
+			 <input type="checkbox" asp-for="@Model.skill[i].Selected"/>
+			 <label asp-for="@Model.skill[i]">@Model.skill[i].Name</label>
+			 <input type="hidden" asp-for="@Model.skill[i].Id"/>
+			 <input type="hidden" asp-for="@Model.skill[i].Name"/>
+			 <br/>
+			}
+				@*<label asp-for="PhoneNumber" class="control-label"></label>
+				<input asp-for="PhoneNumber" class="form-control" />*@
+				<span asp-validation-for="PhoneNumber" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<label asp-for="Email" class="control-label"></label>
+				<input asp-for="Email" class="form-control" />
+				<span asp-validation-for="Email" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Address" class="control-label"></label>
+				<input asp-for="Address" class="form-control" />
+				<span asp-validation-for="Address" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Add" class="btn btn-primary" />
+			</div>
+		</form>
+	</div>
+</div>
+
+
+
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
