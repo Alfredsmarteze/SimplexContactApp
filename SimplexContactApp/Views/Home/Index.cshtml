@@ -35,19 +35,65 @@
 				<span asp-validation-for="PhoneNumber" class="text-danger"></span>
 			</div>
 
+
 			<div class="form-group">
-				@for(Int32 i = 0; i <= Model.skill; i++) { 
-			
-			 <input type="checkbox" asp-for="@Model.skill[i].Selected"/>
-			 <label asp-for="@Model.skill[i]">@Model.skill[i].Name</label>
-			 <input type="hidden" asp-for="@Model.skill[i].Id"/>
-			 <input type="hidden" asp-for="@Model.skill[i].Name"/>
-			 <br/>
+	@for (int i = 0; i < Model.skill.Count; i++)
+	{
+			@*@Html.CheckBoxFor(q => q.skill[i].Selected)
+
+			@Html.HiddenFor(s => s.skill[i].SelectedId)
+
+			@Model.skill[i].SelectedId
+
+			@Html.HiddenFor(a => a.skill[i].Name)
+
+			@Model.skill[i].Name*@
+
+			<input type="checkbox" asp-for="@Model.skill[i].Selected" />
+	<label asp-for="@Model.skill[i]">@Model.skill[i].Name</label>
+	<input type="hidden" asp-for="@Model.skill[i].SelectedId" />
+	<input type="hidden" asp-for="@Model.GoalSelect[i]" />
+	<br />
+			@*@for (int i = 0; i < Model.Merchants.Count; i++)
+			{
+			<tr>
+				<td>
+					@Html.CheckBoxFor(x => x.Merchants[i].IsSelected)
+				</td>
+				<td>
+					@Html.HiddenFor(x => x.Merchants[i].AppId)
+					@Model.Merchants[i].AppId
+				</td>
+				<td>
+					@Html.HiddenFor(x => x.Merchants[i].Name)
+					@Model.Merchants[i].Name
+				</td>
+			</tr>
+			}*@
+
+			@*<label asp-for="PhoneNumber" class="control-label"></label>
+			<input asp-for="PhoneNumber" class="form-control" />*@
+			@*<span asp-validation-for="skill" class="text-danger"></span>*@
 			}
-				@*<label asp-for="PhoneNumber" class="control-label"></label>
-				<input asp-for="PhoneNumber" class="form-control" />*@
-				<span asp-validation-for="PhoneNumber" class="text-danger"></span>
+	</div>
+
+			<div class="form-group">
+				@Html.DropDownListFor(q=>q.GoalName, new SelectList(Enum.GetValues(typeof(Goal))),"Select")
+
+				<b>Your Goal</b>
+				<b>Goal type:</b>@ViewBag.goal
 			</div>
+
+
+			@*<div class="form-group">
+				Skill<br> jQuery:@Html.CheckBoxFor(q => q.Skill, "jQuery")
+				C#:@Html.CheckBoxFor(q => q.Skill, "C#")
+				Azure:@Html.CheckBoxFor(q => q.Skill, "Azure")
+				Bootstrap:@Html.CheckBoxFor(q => q.Skill, "Bootstrap")
+
+			</div>*@
+
+
 
 			<div class="form-group">
 				<label asp-for="Email" class="control-label"></label>

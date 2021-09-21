@@ -9,8 +9,8 @@ namespace SimplexContactApp.Migrations
             migrationBuilder.AlterColumn<string>(
                 name: "PhoneNumber",
                 table: "Contact",
-                type: "nvarchar(12)",
-                maxLength: 12,
+                type: "nvarchar(14)",
+                maxLength: 14,
                 nullable: false,
                 defaultValue: "",
                 oldClrType: typeof(string),
@@ -65,6 +65,13 @@ namespace SimplexContactApp.Migrations
                 type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "");
+
+            migrationBuilder.AddColumn<int>(
+                name: "Setgoal",
+                table: "Contact",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -73,14 +80,18 @@ namespace SimplexContactApp.Migrations
                 name: "Gender",
                 table: "Contact");
 
+            migrationBuilder.DropColumn(
+                name: "Setgoal",
+                table: "Contact");
+
             migrationBuilder.AlterColumn<string>(
                 name: "PhoneNumber",
                 table: "Contact",
                 type: "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(12)",
-                oldMaxLength: 12);
+                oldType: "nvarchar(14)",
+                oldMaxLength: 14);
 
             migrationBuilder.AlterColumn<string>(
                 name: "LastName",

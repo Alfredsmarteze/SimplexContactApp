@@ -9,8 +9,8 @@ using SimplexContactApp.Data;
 namespace SimplexContactApp.Migrations
 {
     [DbContext(typeof(ContactPersonContext))]
-    [Migration("20210824164855_init2")]
-    partial class init2
+    [Migration("20210921044944_init4")]
+    partial class init4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -44,6 +44,12 @@ namespace SimplexContactApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("GoalName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GoalSelect")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(29)
@@ -51,8 +57,8 @@ namespace SimplexContactApp.Migrations
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
+                        .HasMaxLength(14)
+                        .HasColumnType("nvarchar(14)");
 
                     b.HasKey("Id");
 

@@ -27,11 +27,91 @@ namespace SimplexContactApp.Controllers
             _logger = logger;
         }
 
+        //[HttpGet]
+        //public IActionResult Indexx()
+        //{
+        //    var c1 = new CheckBoxClass
+        //    {
+        //        Id = 1,
+        //        Name = "Smart"
+        //    };
+
+        //    var c2 = new CheckBoxClass
+        //    {
+        //        Id = 2,
+        //        Name = "Smart"
+        //    };
+
+        //    var c3 = new CheckBoxClass
+        //    {
+        //        Id = 1,
+        //        Name = "Smart"
+        //    };
+
+        //    List<CheckBoxClass> checkBox = new List<CheckBoxClass>();
+        //    checkBox.Add(c1);
+        //    checkBox.Add(c2);
+        //    checkBox.Add(c3);
+
+        //    var qwe = new CheckBoxList
+        //    {
+        //        checkBoxClass = checkBox
+        //    };
+
+        //    return View(qwe);
+        //}
+
+        //[HttpPost]
+        //public  IActionResult Indexx(CheckBoxClass checkBox1)
+        //{
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        _contactPersonContext.CheckList.Add(checkBox1);
+        //        _contactPersonContext.SaveChanges();
+                 
+        //    }
+        //    return View();
+        //}
+        
 
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            var s1 = new Skillss
+            {
+                SelectedId = 1,
+                Name = "Smart1",
+            };
+
+            var s2 = new Skillss
+            {
+                SelectedId = 2,
+                Name = "Smart2",
+            };
+
+            var s3 = new Skillss
+            {
+                SelectedId = 3,
+                Name = "Smart3",
+            };
+
+            List<Skillss> skills = new List<Skillss>();
+
+            skills.Add(s1);
+            skills.Add(s2);
+            skills.Add(s3);
+
+            var wsd = new ContactModel();
+            wsd.skill = skills;
+
+            var goa = new Goal();
+            ContactModel rf = new ContactModel
+            {
+                GoalName = goa.ToString(),
+                GoalSelect=skills.ToString()
+            };
+            return View(wsd);
         }
 
 
@@ -40,19 +120,37 @@ namespace SimplexContactApp.Controllers
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Index( ContactModel contactModel)
         {
+
+
             
+
                 if (ModelState.IsValid)
                 {
-                    await _contactPersonService.AddContact(contactModel);
-                    ModelState.Clear();
+                //foreach (Skills item in skill)
+                //{
+                //    Skills skil = _contactPersonContext.GetSkills.ToList().Find(q => q.SelectedId == item.SelectedId);
+
+                //    skil.Selected = skil.Selected;
+                //}
+
+
+                //var goal = contactModel.Setgoal;
+                //ViewBag.Goal = goal.ToString();
+                   _contactPersonContext.Add(contactModel);
+                await   _contactPersonContext.SaveChangesAsync();
+
+
+
+                //  await _contactPersonService.AddContact(contactModel);
+                ModelState.Clear();
                     ViewData["Message"] = "Contact Successfully Added.";
                     return View();
                 }
-                else if (!ModelState.IsValid)
-                {
+                else //if (!ModelState.IsValid)
+                
 
                     
-                }
+                
                 return View();
             
         }
